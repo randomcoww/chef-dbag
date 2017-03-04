@@ -25,14 +25,17 @@ module Dbag
     end
 
     def delete(key)
+      new_hash = data_bag.to_hash.dup.delete(key)
+
+      Chef::Log.info(new_hash)
       update(data_bag.to_hash.dup.delete(key))
     end
 
     private
 
     def update(new_data_bag_hash)
-      secret = Chef::EncryptedDataBagItem.load_secret(Chef::Config[:encrypted_data_bag_secret])
-      encrypted_data_hash = Chef::EncryptedDataBagItem.encrypt_data_bag_item(new_data_bag_hash, secret)
+      # secret = Chef::EncryptedDataBagItem.load_secret(Chef::Config[:encrypted_data_bag_secret])
+      encrypted_data_hash = Chef::EncryptedDataBagItem.encrypt_data_bag_item(new_data_bag_hash)
 
       databag_item = Chef::DataBagItem.new
       databag_item.data_bag(@data_bag)

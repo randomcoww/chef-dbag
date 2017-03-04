@@ -9,6 +9,10 @@ module Dbag
     def data_bag
       Chef::EncryptedDataBagItem.load(@data_bag, @data_bag_item)
     rescue
+      default_data
+    end
+
+    def default_data
       {
         "id" => @data_bag_item
       }
@@ -33,6 +37,8 @@ module Dbag
     private
 
     def update(new_data_bag_hash)
+      new_data_bag_hash.merge!(default_data)
+
       secret = Chef::EncryptedDataBagItem.load_secret(Chef::Config[:encrypted_data_bag_secret])
       encrypted_data_hash = Chef::EncryptedDataBagItem.encrypt_data_bag_item(new_data_bag_hash, secret)
 

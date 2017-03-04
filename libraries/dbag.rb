@@ -34,8 +34,8 @@ module Dbag
     private
 
     def update(new_data_bag_hash)
-      # secret = Chef::EncryptedDataBagItem.load_secret(Chef::Config[:encrypted_data_bag_secret])
-      encrypted_data_hash = Chef::EncryptedDataBagItem.encrypt_data_bag_item(new_data_bag_hash)
+      secret = Chef::EncryptedDataBagItem.load_secret(Chef::Config[:encrypted_data_bag_secret])
+      encrypted_data_hash = Chef::EncryptedDataBagItem.encrypt_data_bag_item(new_data_bag_hash, secret)
 
       databag_item = Chef::DataBagItem.new
       databag_item.data_bag(@data_bag)

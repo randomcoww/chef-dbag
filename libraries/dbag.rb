@@ -25,10 +25,9 @@ module Dbag
     end
 
     def delete(key)
-      new_hash = data_bag.to_hash.dup.delete(key)
-
-      Chef::Log.info(new_hash)
-      update(data_bag.to_hash.dup.delete(key))
+      new_data_bag_hash = data_bag.to_hash
+      new_data_bag_hash.delete(key)
+      update(new_data_bag_hash)
     end
 
     private

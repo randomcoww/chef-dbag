@@ -25,7 +25,7 @@ module Dbag
     end
 
     def delete(key)
-      update(data_bag.to_hash.delete(key))
+      update(data_bag.to_hash.dup.delete(key))
     end
 
     private

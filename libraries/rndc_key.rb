@@ -1,8 +1,8 @@
 module Dbag
-  class RndcKey < Dbag::KeyStore
+  class RndcKey < Dbag::Keystore
 
     def get_or_create(key)
-      data_bag[key] || create(key)
+      get(key) || create(key)
     end
 
     def create(key)

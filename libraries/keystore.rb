@@ -1,5 +1,5 @@
 module Dbag
-  class KeyStore
+  class Keystore
 
     def initialize(data_bag, data_bag_item)
       @data_bag = data_bag

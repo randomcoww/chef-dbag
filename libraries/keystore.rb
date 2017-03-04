@@ -7,7 +7,7 @@ module Dbag
     end
 
     def data_bag
-      Chef::EncryptedDataBagItem.load(@data_bag, @data_bag_item)
+      Chef::EncryptedDataBagItem.load(@data_bag, @data_bag_item).to_hash
     rescue
       empty_data_bag
     end
@@ -23,13 +23,13 @@ module Dbag
     end
 
     def put(key, value)
-      update(data_bag.to_hash.merge({
+      update(data_bag.merge({
         key => value
       }))
     end
 
     def delete(key)
-      new_data_bag_hash = data_bag.to_hash
+      new_data_bag_hash = data_bag
       new_data_bag_hash.delete(key)
       update(new_data_bag_hash)
     end

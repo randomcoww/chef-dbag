@@ -1,5 +1,5 @@
 module Dbag
-  class RndcKey < Dbag::Password
+  class Vrrp < Dbag::Password
 
     def generate
       SecureRandom.base64(8)

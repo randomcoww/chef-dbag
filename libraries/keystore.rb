@@ -34,6 +34,14 @@ module Dbag
       update(new_data_bag_hash)
     end
 
+    def get_or_create(key, value)
+      existing = get(key)
+      return existing if !existing.nil?
+
+      put(key, value)
+      value
+    end
+
     private
 
     def update(new_data_bag_hash)
